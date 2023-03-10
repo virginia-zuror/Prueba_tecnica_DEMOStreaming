@@ -10,10 +10,12 @@
     padding: 1rem 5rem;
 }
 
-.Header > .title_header{
+
+.Header >a > abbr>.title_header{
     font-weight: 500;
     font-size: 35px;
 }
+
 .Header > .btns_header{
     display: flex;
     flex-direction: row;

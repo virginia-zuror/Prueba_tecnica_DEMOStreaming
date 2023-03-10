@@ -9,7 +9,7 @@ const Movies = () => {
         <h3>Popular Movies</h3>
       </div>
       <div className="content">
-        <figure className="movies">Popular movies</figure>
+        <figure className="figure_movies">Popular movies</figure>
       </div>
     </div>
   );

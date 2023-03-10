@@ -9,7 +9,7 @@ const Series = () => {
         <h3>Popular Series</h3>
       </div>
       <div className="content">
-        <figure className="series">Popular Series</figure>
+        <figure className="figure_series">Popular Series</figure>
       </div>
     </div>
   );
