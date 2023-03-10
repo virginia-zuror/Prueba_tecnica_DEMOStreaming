@@ -3,12 +3,13 @@
     flex-wrap: wrap;
     min-height: 10vh;
     background: rgb(0,93,190);
-background: linear-gradient(360deg, rgba(0,93,190,1) 1%, rgba(4,105,252,1) 59%, rgba(155,184,251,1) 100%);
+    background: linear-gradient(360deg, rgba(0,93,190,1) 1%, rgba(4,105,252,1) 59%, rgba(155,184,251,1) 100%);
     color: var(--font-primary-header);
     justify-content: space-between;
     align-items: center;
-    padding: 0 5rem;
+    padding: 1rem 5rem;
 }
+
 .Header > .title_header{
     font-weight: 500;
     font-size: 35px;
@@ -20,10 +21,19 @@ background: linear-gradient(360deg, rgba(0,93,190,1) 1%, rgba(4,105,252,1) 59%, 
     justify-content: center;
     gap: 5rem;
 }
-.Header > .btns_header > .login{
-    background: none;
-    color: var(--font-primary-header);
-    font-weight: 300;
-    font-size: medium;
-    border: none;
-}
+
+
+@media (max-width: 768px) {
+    .Header{
+        gap:1rem;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .Header > .title_header{
+        font-weight: 400;
+        font-size: 25px;
+        width: 100%;
+    }
+   
+  }

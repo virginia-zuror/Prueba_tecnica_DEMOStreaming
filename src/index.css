@@ -36,4 +36,5 @@ a{
 }
 button{
     cursor: pointer;
+    color: inherit;
 }

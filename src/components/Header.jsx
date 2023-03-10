@@ -2,13 +2,15 @@ import './Header.css';
 
 import React from 'react';
 
+import Button from '../ui/Button';
+
 const Header = () => {
   return (
     <div className="Header">
       <h1 className="title_header">DEMO Streaming</h1>
       <span className="btns_header">
-        <button className='login'>Log in</button>
-        <button>Start your free trial</button>
+        <Button variant="" text="Log in"></Button>
+        <Button variant="contained" text="Start your free trial"></Button>
       </span>
     </div>
   );
