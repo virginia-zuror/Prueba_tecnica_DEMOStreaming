@@ -1,6 +1,29 @@
 .Header{
     display:flex;
-    height: 10vh;
-    background-color: var(--bg-header);
+    flex-wrap: wrap;
+    min-height: 10vh;
+    background: rgb(0,93,190);
+background: linear-gradient(360deg, rgba(0,93,190,1) 1%, rgba(4,105,252,1) 59%, rgba(155,184,251,1) 100%);
     color: var(--font-primary-header);
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5rem;
+}
+.Header > .title_header{
+    font-weight: 500;
+    font-size: 35px;
+}
+.Header > .btns_header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+}
+.Header > .btns_header > .login{
+    background: none;
+    color: var(--font-primary-header);
+    font-weight: 300;
+    font-size: medium;
+    border: none;
 }
