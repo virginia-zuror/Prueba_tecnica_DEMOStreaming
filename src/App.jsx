@@ -1,15 +1,18 @@
-import { NavLink, Outlet } from 'react-router-dom';
-
 import './App.css';
+
+import { Outlet } from 'react-router-dom';
+
 import Footer from './components/Footer';
 import Header from './components/Header';
 
 const App = () => {
   return (
     <div className="App">
-      <Header/>
-      <Outlet className='Outlet'/>
-      <Footer/>
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
     </div>
   );
 };
