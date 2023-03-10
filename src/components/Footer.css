@@ -1,0 +1,20 @@
+.Footer{
+    height: 25vh;
+    background-color: var(--bg-footer);
+    color: var(--font-footer);
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    padding-left: 10rem;
+    padding-right: 5rem;
+}
+.links_footer{
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
