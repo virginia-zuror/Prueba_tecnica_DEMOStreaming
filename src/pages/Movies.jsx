@@ -20,8 +20,10 @@ const Movies = () => {
     all.map((show) => show.programType.includes('movie') && filter.push(show));
     const movieToPrint = filter.filter((show) => show.releaseYear >= 2010);
     movieToPrint.splice(20);
-    setMovies(movieToPrint);
-
+    /* setMovies(movieToPrint); */
+    const copiedMovies = [...movieToPrint];
+    const moviesSorted = copiedMovies.sort((a, b) => (a.title < b.title ? -1 : +1));
+    setMovies(moviesSorted);
     setLoaded(true);
   };
   useEffect(() => {
@@ -33,13 +35,18 @@ const Movies = () => {
       <div className="title_movies">
         <h3>Popular Movies</h3>
       </div>
-      <div className="content">
+      <div className="content_movies">
         {!loaded ? (
           <h2>Loading...</h2>
         ) : (
-          movies.map((movie) => <p key={movie.title}>{movie.title}</p>)
+          movies.map((movie) => (
+            <figure key={movie.title}>
+              <h4>{movie.title}</h4>
+              <img src={movie.images['Poster Art'].url} alt={movie.title} />
+            </figure>
+          ))
         )}
-        {error && !loaded && <h2>Oops! Something went wrong...😖</h2>}
+        {error && <h2>Oops! Something went wrong...😖</h2>}
       </div>
     </div>
   );

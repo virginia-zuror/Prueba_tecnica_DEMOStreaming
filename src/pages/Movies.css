@@ -9,3 +9,23 @@
     font-weight:500;
     font-size: 25px;
 }
+.content_movies{
+    padding: 5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 2rem;
+}
+
+.content_movies > figure{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.content_movies > figure > img{
+    width: 100%;
+    object-fit: cover;
+}
