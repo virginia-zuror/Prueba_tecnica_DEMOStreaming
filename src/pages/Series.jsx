@@ -2,12 +2,16 @@ import './Series.css';
 
 import React, { useEffect, useState } from 'react';
 
+import Button from '../ui/Button';
+import Modal from '../ui/Modal';
+
 const Series = () => {
   const [all, setAll] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(true);
   const [series, setSeries] = useState([]);
   let filter = [];
+  const [details, setDetails] = useState(false);
 
   const getAll = async () => {
     await fetch(
@@ -31,7 +35,7 @@ const Series = () => {
 
   useEffect(() => {
     getAll();
-  }, [error]);
+  }, [series]);
 
   /*  const getSeries = () => {
     getAll();
@@ -47,17 +51,42 @@ const Series = () => {
         <h3>Popular Series</h3>
       </div>
       <div className="content_series">
-        {!loaded ? (
+        {error ? (
+          <h2>Oops! Something went wrong...</h2>
+        ) : !loaded ? (
           <h2>Loading...</h2>
         ) : (
           series.map((serie) => (
             <figure key={serie.title}>
-              <h4>{serie.title}</h4>
               <img src={serie.images['Poster Art'].url} alt={serie.title} />
+              <Button
+                action={() => {
+                  setDetails(true);
+                  console.log(serie.title);
+                }}
+                text={serie.title}
+                fontcolor="black"
+              ></Button>
+              {details && (
+                <Modal
+                  action={() => setDetails(false)}
+                  content={
+                    <div className="modal_content">
+                      <h3>{serie.title}</h3>
+                      <p>{serie.description}</p>
+                      <p>{serie.releaseYear}</p>
+                      <img
+                        className="image_modal"
+                        src={serie.images['Poster Art'].url}
+                        alt={serie.title}
+                      />
+                    </div>
+                  }
+                />
+              )}
             </figure>
           ))
         )}
-        {error && <h2>Oops! Something went wrong...😖</h2>}
       </div>
     </div>
   );

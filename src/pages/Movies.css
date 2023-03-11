@@ -10,6 +10,7 @@
     font-size: 25px;
 }
 .content_movies{
+    
     padding: 5rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -21,11 +22,32 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     gap: 2rem;
+    
 }
 
 .content_movies > figure > img{
     width: 100%;
+    object-fit: cover;
+    transition: all ease-in-out 0.5s;
+    border: white solid 0;
+    
+}
+.content_movies > figure > img:hover{
+    opacity: 80%;
+    border: white solid 1px;
+}
+
+.modal_content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.image_modal{
+    width: 150px;
     object-fit: cover;
 }

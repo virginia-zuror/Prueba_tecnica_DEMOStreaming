@@ -2,12 +2,17 @@ import './Movies.css';
 
 import React, { useEffect, useState } from 'react';
 
+import Button from '../ui/Button';
+import Modal from '../ui/Modal';
+
 const Movies = () => {
   const [all, setAll] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(true); //seteo un estado de error para poder iniciar el useEffect y controlar el fallo del fetch al pintado de los datos
   const [movies, setMovies] = useState([]);
   let filter = [];
+
+  const [details, setDetails] = useState(false);
 
   const getAll = async () => {
     await fetch(
@@ -26,9 +31,10 @@ const Movies = () => {
     setMovies(moviesSorted);
     setLoaded(true);
   };
+
   useEffect(() => {
     getAll();
-  }, [error]);
+  }, [movies]);
 
   return (
     <div>
@@ -36,17 +42,39 @@ const Movies = () => {
         <h3>Popular Movies</h3>
       </div>
       <div className="content_movies">
-        {!loaded ? (
+        {error ? (
+          <h2>Oops! Something went wrong...</h2>
+        ) : !loaded ? (
           <h2>Loading...</h2>
         ) : (
           movies.map((movie) => (
             <figure key={movie.title}>
-              <h4>{movie.title}</h4>
               <img src={movie.images['Poster Art'].url} alt={movie.title} />
+              <Button
+                action={() => setDetails(true)}
+                text={movie.title}
+                fontcolor="black"
+              ></Button>
+              {details && (
+                <Modal
+                  action={() => setDetails(false)}
+                  content={
+                    <div className="modal_content">
+                      <h3>{movie.title}</h3>
+                      <p>{movie.description}</p>
+                      <p>{movie.releaseYear}</p>
+                      <img
+                        className="image_modal"
+                        src={movie.images['Poster Art'].url}
+                        alt={movie.title}
+                      />
+                    </div>
+                  }
+                />
+              )}
             </figure>
           ))
         )}
-        {error && <h2>Oops! Something went wrong...😖</h2>}
       </div>
     </div>
   );
