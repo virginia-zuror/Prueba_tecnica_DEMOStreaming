@@ -8,11 +8,12 @@ import Modal from '../ui/Modal';
 const Movies = () => {
   const [all, setAll] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(true); //seteo un estado de error para poder iniciar el useEffect y controlar el fallo del fetch al pintado de los datos
+  const [error, setError] = useState(true);
   const [movies, setMovies] = useState([]);
   let filter = [];
 
   const [details, setDetails] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const getAll = async () => {
     await fetch(
@@ -32,6 +33,14 @@ const Movies = () => {
     setLoaded(true);
   };
 
+  const [itemClicked, setItemClicked] = useState();
+  let item;
+  const handleClick = (clicked) => {
+    setClicked(true);
+    setDetails(true);
+    item = clicked.parentNode.className;
+  };
+
   useEffect(() => {
     getAll();
   }, [movies]);
@@ -47,26 +56,29 @@ const Movies = () => {
         ) : !loaded ? (
           <h2>Loading...</h2>
         ) : (
-          movies.map((movie) => (
-            <figure key={movie.title}>
+          movies.map((movie, index) => (
+            <figure key={index} className={index}>
               <img src={movie.images['Poster Art'].url} alt={movie.title} />
               <Button
-                action={() => setDetails(true)}
+                action={(e) => {
+                  handleClick(e.target);
+                  setItemClicked(movies[item]);
+                }}
                 text={movie.title}
                 fontcolor="black"
               ></Button>
-              {details && (
+              {details && clicked && (
                 <Modal
                   action={() => setDetails(false)}
                   content={
                     <div className="modal_content">
-                      <h3>{movie.title}</h3>
-                      <p>{movie.description}</p>
-                      <p>{movie.releaseYear}</p>
+                      <h1>{itemClicked.title}</h1>
+                      <p>{itemClicked.description}</p>
+                      <p>{itemClicked.releaseYear}</p>
                       <img
+                        src={itemClicked.images['Poster Art'].url}
+                        alt={itemClicked.title}
                         className="image_modal"
-                        src={movie.images['Poster Art'].url}
-                        alt={movie.title}
                       />
                     </div>
                   }

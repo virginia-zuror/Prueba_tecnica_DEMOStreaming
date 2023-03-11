@@ -4,8 +4,7 @@ import Button from './Button';
 
 const Overlay = styled.div`
   width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -17,7 +16,7 @@ const Overlay = styled.div`
 
 const ModalContent = styled.div`
   width: 50%;
-  height: 70%;
+  height: auto;
   position: relative;
   background-color: #ffffff;
   border: 2px black solid;
@@ -37,6 +36,9 @@ const ModalContent = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 5px;
+  }
+  @media (max-width: 768px) {
+    font-size: 0.6rem;
   }
 `;
 

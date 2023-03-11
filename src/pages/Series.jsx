@@ -12,6 +12,7 @@ const Series = () => {
   const [series, setSeries] = useState([]);
   let filter = [];
   const [details, setDetails] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const getAll = async () => {
     await fetch(
@@ -31,6 +32,14 @@ const Series = () => {
     setSeries(seriesSorted);
 
     setLoaded(true);
+  };
+
+  const [itemClicked, setItemClicked] = useState();
+  let item;
+  const handleClick = (clicked) => {
+    setClicked(true);
+    setDetails(true);
+    item = clicked.parentNode.className;
   };
 
   useEffect(() => {
@@ -56,29 +65,29 @@ const Series = () => {
         ) : !loaded ? (
           <h2>Loading...</h2>
         ) : (
-          series.map((serie) => (
-            <figure key={serie.title}>
+          series.map((serie, index) => (
+            <figure key={index} className={index}>
               <img src={serie.images['Poster Art'].url} alt={serie.title} />
               <Button
-                action={() => {
-                  setDetails(true);
-                  console.log(serie.title);
+                action={(e) => {
+                  handleClick(e.target);
+                  setItemClicked(series[item]);
                 }}
                 text={serie.title}
                 fontcolor="black"
               ></Button>
-              {details && (
+              {details && clicked && (
                 <Modal
                   action={() => setDetails(false)}
                   content={
                     <div className="modal_content">
-                      <h3>{serie.title}</h3>
-                      <p>{serie.description}</p>
-                      <p>{serie.releaseYear}</p>
+                      <h1>{itemClicked.title}</h1>
+                      <p>{itemClicked.description}</p>
+                      <p>{itemClicked.releaseYear}</p>
                       <img
+                        src={itemClicked.images['Poster Art'].url}
+                        alt={itemClicked.title}
                         className="image_modal"
-                        src={serie.images['Poster Art'].url}
-                        alt={serie.title}
                       />
                     </div>
                   }
