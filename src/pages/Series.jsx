@@ -5,19 +5,37 @@ import React, { useEffect, useState } from 'react';
 const Series = () => {
   const [all, setAll] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(true);
   const [series, setSeries] = useState([]);
+  let filter = [];
 
   const getAll = async () => {
-    // eslint-disable-next-line prettier/prettier
-    fetch('https://raw.githubusercontent.com/StreamCo/react-coding-challenge/master/feed/sample.json')
+    await fetch(
+      // eslint-disable-next-line prettier/prettier
+      'https://raw.githubusercontent.com/StreamCo/react-coding-challenge/master/feed/sample.json'
+    )
       .then((res) => res.json())
       .then((res) => setAll(res.entries));
+
+    setError(false);
+    all.map((show) => show.programType.includes('series') && filter.push(show));
+    const serieToPrint = filter.filter((show) => show.releaseYear >= 2010);
+    serieToPrint.splice(20);
+    setSeries(serieToPrint);
 
     setLoaded(true);
   };
   useEffect(() => {
     getAll();
-  }, []);
+  }, [error]);
+
+  /*  const getSeries = () => {
+    getAll();
+    all.map((show) => show.programType.includes('series') && filter.push(show));
+
+    setSeries(filter);
+  }; */
+  /* getAll(); */
 
   return (
     <div>
@@ -26,14 +44,11 @@ const Series = () => {
       </div>
       <div className="content">
         {!loaded ? (
-          <h3>Loading...</h3>
-        ) : all.length > 0 ? (
-          all.map((show) => {
-            show.programType.includes('series') && <h3 key={show.title}>{show.title}</h3>;
-          })
+          <h2>Loading...</h2>
         ) : (
-          <h3>Error...</h3>
+          series.map((serie) => <p key={serie.title}>{serie.title}</p>)
         )}
+        {error && <h2>Oops! Something went wrong...😖</h2>}
       </div>
     </div>
   );
