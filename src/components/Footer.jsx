@@ -12,22 +12,22 @@ const Footer = () => {
     <div className="Footer">
       <ul className="links_footer">
         <li>
-          <NavLink to="home">Home </NavLink>
+          <NavLink to="/">Home </NavLink>
         </li>
         <li>
-          <NavLink to="terms">Terms and Conditions </NavLink>
+          <NavLink to="#">Terms and Conditions </NavLink>
         </li>
         <li>
-          <NavLink to="privacypol">Privacy Policy </NavLink>
+          <NavLink to="#">Privacy Policy </NavLink>
         </li>
         <li>
-          <NavLink to="collectst">Collection Statement </NavLink>
+          <NavLink to="#">Collection Statement </NavLink>
         </li>
         <li>
-          <NavLink to="help">Help </NavLink>
+          <NavLink to="#">Help </NavLink>
         </li>
         <li>
-          <NavLink to="mngaccount">Manage Account </NavLink>
+          <NavLink to="#">Manage Account </NavLink>
         </li>
       </ul>
       <p>Copyright © 2016 DEMO Streaming. All Rights Reserved.</p>
